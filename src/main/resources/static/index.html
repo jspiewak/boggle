@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" ng-app="boggle" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>RStudio Boggle</title>
+    <link href="/webjars/bootstrap/3.3.6/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/3.3.6/css/bootstrap.min.css}" rel="stylesheet" media="screen"/>
+    <script src="/webjars/angularjs/1.4.8/angular.min.js"
+            th:src="@{/webjars/angularjs/1.4.8/angular.min.js}"></script>
+    <script src="/webjars/angularjs/1.4.8/angular-resource.min.js"
+            th:src="@{/webjars/angularjs/1.4.8/angular-resource.min.js}"></script>
+    <script type="text/javascript" src="js/boggle.js"
+            th:src="@{/js/boggle.js}"></script>
+    <link href="css/boggle.css" th:href="@{/css/boggle.css}" rel="stylesheet" media="screen"/>
+</head>
+<body ng-controller="BoggleController">
+<h1>RStudio Boggle</h1>
+
+<div id="instructions">
+    Enter the letters of the Boggle board. Use Q for Qu. Then hit <b>Solve</b> to obtain results.
+</div>
+
+<div id="boggle-panel">
+    <div id="board" class="boggle-board">
+        <table>
+            <tr class="row" ng-repeat="row in board track by $index">
+                <td ng-repeat="die in row track by $index">
+                    <!-- TODO: on key up, move to the next cell -->
+                    <input type="text" class="cell" ng-model="$parent.board[$parent.$index][$index]" ng-maxlength="1" title="cell"/>
+                </td>
+            </tr>
+        </table>
+        <input type="button" class="button" ng-click="reset()" value="Reset"/>
+        <input type="button" class="button" ng-click="solve()" value="Solve"/>
+    </div>
+</div>
+
+<div id="words-panel" ng-show="words">
+    <ul id="word-list">
+        <li ng-repeat="word in words">{{word}}</li>
+    </ul>
+</div>
+
+</body>
+</html>
