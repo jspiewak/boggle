@@ -17,7 +17,7 @@ class BoggleService {
 
     @PostConstruct
     void loadDictionary() {
-        dictionary = (new ClassPathResource('boggle.dict').file as String[]) as Set<String>
+        dictionary = (new ClassPathResource('boggle.dict').inputStream.readLines()) as Set<String>
     }
 
     List<String> findWords(List<List<String>> rows) {
